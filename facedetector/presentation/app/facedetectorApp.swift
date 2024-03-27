@@ -11,7 +11,7 @@ import SwiftUI
 struct facedetectorApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SelectorView()
         }
     }
 }

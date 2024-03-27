@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C112E1702BB4954900F5C951 /* TrackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112E16F2BB4954900F5C951 /* TrackImage.swift */; };
 		C1CF64842BB32FE600065410 /* facedetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64832BB32FE600065410 /* facedetectorApp.swift */; };
-		C1CF64862BB32FE600065410 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64852BB32FE600065410 /* ContentView.swift */; };
+		C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64852BB32FE600065410 /* SelectorView.swift */; };
 		C1CF64882BB32FE900065410 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1CF64872BB32FE900065410 /* Assets.xcassets */; };
 		C1CF648B2BB32FE900065410 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1CF648A2BB32FE900065410 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C112E16F2BB4954900F5C951 /* TrackImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackImage.swift; sourceTree = "<group>"; };
 		C1CF64802BB32FE600065410 /* facedetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = facedetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1CF64832BB32FE600065410 /* facedetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = facedetectorApp.swift; sourceTree = "<group>"; };
-		C1CF64852BB32FE600065410 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C1CF64852BB32FE600065410 /* SelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorView.swift; sourceTree = "<group>"; };
 		C1CF64872BB32FE900065410 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1CF648A2BB32FE900065410 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +34,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C112E16E2BB4953600F5C951 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				C112E16F2BB4954900F5C951 /* TrackImage.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		C112E1712BB4966900F5C951 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C112E1732BB4967300F5C951 /* module */,
+				C112E1722BB4966F00F5C951 /* app */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		C112E1722BB4966F00F5C951 /* app */ = {
+			isa = PBXGroup;
+			children = (
+				C1CF64832BB32FE600065410 /* facedetectorApp.swift */,
+			);
+			path = app;
+			sourceTree = "<group>";
+		};
+		C112E1732BB4967300F5C951 /* module */ = {
+			isa = PBXGroup;
+			children = (
+				C112E1742BB4967700F5C951 /* selector */,
+			);
+			path = module;
+			sourceTree = "<group>";
+		};
+		C112E1742BB4967700F5C951 /* selector */ = {
+			isa = PBXGroup;
+			children = (
+				C1CF64852BB32FE600065410 /* SelectorView.swift */,
+			);
+			path = selector;
+			sourceTree = "<group>";
+		};
 		C1CF64772BB32FE600065410 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +94,8 @@
 		C1CF64822BB32FE600065410 /* facedetector */ = {
 			isa = PBXGroup;
 			children = (
-				C1CF64832BB32FE600065410 /* facedetectorApp.swift */,
-				C1CF64852BB32FE600065410 /* ContentView.swift */,
+				C112E1712BB4966900F5C951 /* presentation */,
+				C112E16E2BB4953600F5C951 /* Image */,
 				C1CF64872BB32FE900065410 /* Assets.xcassets */,
 				C1CF64892BB32FE900065410 /* Preview Content */,
 			);
@@ -137,7 +180,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1CF64862BB32FE600065410 /* ContentView.swift in Sources */,
+				C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */,
+				C112E1702BB4954900F5C951 /* TrackImage.swift in Sources */,
 				C1CF64842BB32FE600065410 /* facedetectorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
