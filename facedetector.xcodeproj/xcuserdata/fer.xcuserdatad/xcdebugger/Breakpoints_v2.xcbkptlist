@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "1A033041-1C78-45B1-90E2-83F9A2F9D7AF"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B7B87ED0-D92C-4172-A895-D3377C9485EC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "facedetector/presentation/module/image/ImagePreviewViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "getValue(for:for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B7B87ED0-D92C-4172-A895-D3377C9485EC - 769a91f51517f4cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "facedetector.ImagePreviewViewModel.getValue(for: CoreGraphics.CGFloat, for: CoreGraphics.CGFloat) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "facedetector"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fer/ios-POC-visionSDK-face-detection/facedetector/presentation/module/image/ImagePreviewViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "484">
+               </Location>
+               <Location
+                  uuid = "B7B87ED0-D92C-4172-A895-D3377C9485EC - 769a91f51517f4cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "facedetector.ImagePreviewViewModel.getValue(for: CoreGraphics.CGFloat, for: CoreGraphics.CGFloat) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "facedetector"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fer/ios-POC-visionSDK-face-detection/facedetector/presentation/module/image/ImagePreviewViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

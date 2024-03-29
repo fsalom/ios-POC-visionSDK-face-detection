@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C112E1702BB4954900F5C951 /* TrackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112E16F2BB4954900F5C951 /* TrackImage.swift */; };
+		C112E18C2BB5922700F5C951 /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112E18B2BB5922700F5C951 /* ImagePreviewView.swift */; };
+		C112E18E2BB5A1C300F5C951 /* ImagePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112E18D2BB5A1C300F5C951 /* ImagePreviewViewModel.swift */; };
 		C1CF64842BB32FE600065410 /* facedetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64832BB32FE600065410 /* facedetectorApp.swift */; };
 		C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64852BB32FE600065410 /* SelectorView.swift */; };
 		C1CF64882BB32FE900065410 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1CF64872BB32FE900065410 /* Assets.xcassets */; };
@@ -16,6 +18,9 @@
 
 /* Begin PBXFileReference section */
 		C112E16F2BB4954900F5C951 /* TrackImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackImage.swift; sourceTree = "<group>"; };
+		C112E18B2BB5922700F5C951 /* ImagePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
+		C112E18D2BB5A1C300F5C951 /* ImagePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewModel.swift; sourceTree = "<group>"; };
+		C1CF2B732BB5D04B00909009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1CF64802BB32FE600065410 /* facedetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = facedetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1CF64832BB32FE600065410 /* facedetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = facedetectorApp.swift; sourceTree = "<group>"; };
 		C1CF64852BB32FE600065410 /* SelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorView.swift; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 		C112E1732BB4967300F5C951 /* module */ = {
 			isa = PBXGroup;
 			children = (
+				C112E18A2BB5921300F5C951 /* image */,
 				C112E1742BB4967700F5C951 /* selector */,
 			);
 			path = module;
@@ -73,6 +79,15 @@
 				C1CF64852BB32FE600065410 /* SelectorView.swift */,
 			);
 			path = selector;
+			sourceTree = "<group>";
+		};
+		C112E18A2BB5921300F5C951 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				C112E18B2BB5922700F5C951 /* ImagePreviewView.swift */,
+				C112E18D2BB5A1C300F5C951 /* ImagePreviewViewModel.swift */,
+			);
+			path = image;
 			sourceTree = "<group>";
 		};
 		C1CF64772BB32FE600065410 = {
@@ -94,6 +109,7 @@
 		C1CF64822BB32FE600065410 /* facedetector */ = {
 			isa = PBXGroup;
 			children = (
+				C1CF2B732BB5D04B00909009 /* Info.plist */,
 				C112E1712BB4966900F5C951 /* presentation */,
 				C112E16E2BB4953600F5C951 /* Image */,
 				C1CF64872BB32FE900065410 /* Assets.xcassets */,
@@ -181,6 +197,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */,
+				C112E18C2BB5922700F5C951 /* ImagePreviewView.swift in Sources */,
+				C112E18E2BB5A1C300F5C951 /* ImagePreviewViewModel.swift in Sources */,
 				C112E1702BB4954900F5C951 /* TrackImage.swift in Sources */,
 				C1CF64842BB32FE600065410 /* facedetectorApp.swift in Sources */,
 			);
@@ -313,12 +331,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"facedetector/Preview Content\"";
-				DEVELOPMENT_TEAM = 3BJD5A7BSQ;
+				DEVELOPMENT_TEAM = R88CDNMKLQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = facedetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -329,8 +349,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = es.fernandosalom.vision.facedetector;
+				PRODUCT_BUNDLE_IDENTIFIER = es.fernandosalom.vision.facetest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -342,12 +363,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"facedetector/Preview Content\"";
-				DEVELOPMENT_TEAM = 3BJD5A7BSQ;
+				DEVELOPMENT_TEAM = R88CDNMKLQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = facedetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -358,8 +381,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = es.fernandosalom.vision.facedetector;
+				PRODUCT_BUNDLE_IDENTIFIER = es.fernandosalom.vision.facetest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
