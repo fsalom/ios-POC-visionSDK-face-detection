@@ -10,6 +10,7 @@
 		C112E1702BB4954900F5C951 /* TrackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112E16F2BB4954900F5C951 /* TrackImage.swift */; };
 		C112E18C2BB5922700F5C951 /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112E18B2BB5922700F5C951 /* ImagePreviewView.swift */; };
 		C112E18E2BB5A1C300F5C951 /* ImagePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112E18D2BB5A1C300F5C951 /* ImagePreviewViewModel.swift */; };
+		C1495EE72BB9FC3D00981896 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1495EE62BB9FC3D00981896 /* ImagePicker.swift */; };
 		C1CF64842BB32FE600065410 /* facedetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64832BB32FE600065410 /* facedetectorApp.swift */; };
 		C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64852BB32FE600065410 /* SelectorView.swift */; };
 		C1CF64882BB32FE900065410 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1CF64872BB32FE900065410 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		C112E16F2BB4954900F5C951 /* TrackImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackImage.swift; sourceTree = "<group>"; };
 		C112E18B2BB5922700F5C951 /* ImagePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
 		C112E18D2BB5A1C300F5C951 /* ImagePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewModel.swift; sourceTree = "<group>"; };
+		C1495EE62BB9FC3D00981896 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C1CF2B732BB5D04B00909009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1CF64802BB32FE600065410 /* facedetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = facedetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1CF64832BB32FE600065410 /* facedetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = facedetectorApp.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 		C112E1712BB4966900F5C951 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C1495EE42BB9FC2600981896 /* manager */,
 				C112E1732BB4967300F5C951 /* module */,
 				C112E1722BB4966F00F5C951 /* app */,
 			);
@@ -88,6 +91,22 @@
 				C112E18D2BB5A1C300F5C951 /* ImagePreviewViewModel.swift */,
 			);
 			path = image;
+			sourceTree = "<group>";
+		};
+		C1495EE42BB9FC2600981896 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				C1495EE52BB9FC2B00981896 /* imagePicker */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
+		C1495EE52BB9FC2B00981896 /* imagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				C1495EE62BB9FC3D00981896 /* ImagePicker.swift */,
+			);
+			path = imagePicker;
 			sourceTree = "<group>";
 		};
 		C1CF64772BB32FE600065410 = {
@@ -199,6 +218,7 @@
 				C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */,
 				C112E18C2BB5922700F5C951 /* ImagePreviewView.swift in Sources */,
 				C112E18E2BB5A1C300F5C951 /* ImagePreviewViewModel.swift in Sources */,
+				C1495EE72BB9FC3D00981896 /* ImagePicker.swift in Sources */,
 				C112E1702BB4954900F5C951 /* TrackImage.swift in Sources */,
 				C1CF64842BB32FE600065410 /* facedetectorApp.swift in Sources */,
 			);
