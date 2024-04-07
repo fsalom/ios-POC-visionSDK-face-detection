@@ -14,6 +14,7 @@
 		C11864032BC16A7E00B19502 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11864022BC16A7E00B19502 /* CameraPreviewView.swift */; };
 		C11864052BC16AF900B19502 /* CameraPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11864042BC16AF900B19502 /* CameraPreviewViewModel.swift */; };
 		C11864092BC16BE000B19502 /* VideoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11864082BC16BE000B19502 /* VideoError.swift */; };
+		C118640C2BC16CF500B19502 /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C118640B2BC16CF500B19502 /* Previewer.swift */; };
 		C1495EE72BB9FC3D00981896 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1495EE62BB9FC3D00981896 /* ImagePicker.swift */; };
 		C1CF64842BB32FE600065410 /* facedetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64832BB32FE600065410 /* facedetectorApp.swift */; };
 		C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CF64852BB32FE600065410 /* SelectorView.swift */; };
@@ -29,6 +30,7 @@
 		C11864022BC16A7E00B19502 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 		C11864042BC16AF900B19502 /* CameraPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewViewModel.swift; sourceTree = "<group>"; };
 		C11864082BC16BE000B19502 /* VideoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoError.swift; sourceTree = "<group>"; };
+		C118640B2BC16CF500B19502 /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		C1495EE62BB9FC3D00981896 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C1CF2B732BB5D04B00909009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1CF64802BB32FE600065410 /* facedetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = facedetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 		C11864012BC16A6E00B19502 /* camera */ = {
 			isa = PBXGroup;
 			children = (
+				C118640A2BC16CE200B19502 /* component */,
 				C11864022BC16A7E00B19502 /* CameraPreviewView.swift */,
 				C11864042BC16AF900B19502 /* CameraPreviewViewModel.swift */,
 			);
@@ -132,6 +135,14 @@
 				C11864082BC16BE000B19502 /* VideoError.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		C118640A2BC16CE200B19502 /* component */ = {
+			isa = PBXGroup;
+			children = (
+				C118640B2BC16CF500B19502 /* Previewer.swift */,
+			);
+			path = component;
 			sourceTree = "<group>";
 		};
 		C1495EE42BB9FC2600981896 /* manager */ = {
@@ -264,6 +275,7 @@
 				C1CF64862BB32FE600065410 /* SelectorView.swift in Sources */,
 				C112E18C2BB5922700F5C951 /* ImagePreviewView.swift in Sources */,
 				C11864052BC16AF900B19502 /* CameraPreviewViewModel.swift in Sources */,
+				C118640C2BC16CF500B19502 /* Previewer.swift in Sources */,
 				C11864002BC1699E00B19502 /* AuthorizationChecker.swift in Sources */,
 				C112E18E2BB5A1C300F5C951 /* ImagePreviewViewModel.swift in Sources */,
 				C1495EE72BB9FC3D00981896 /* ImagePicker.swift in Sources */,
@@ -327,7 +339,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -384,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -407,11 +419,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = facedetector/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Esta app necesita acceso a la cámara para poder usar el video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -439,11 +453,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = facedetector/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Esta app necesita acceso a la cámara para poder usar el video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

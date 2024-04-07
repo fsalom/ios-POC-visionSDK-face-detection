@@ -5,11 +5,30 @@ import AVFoundation
 
 
 struct CameraPreviewView: View {
-    @ObservedObject var viewModel = ImagePreviewViewModel()
-    let session = AVCaptureSession()
+    @StateObject var viewModel = CameraPreviewViewModel()
+    @State var isRecording = false
 
     var body: some View {
-        Text("x")
+        ZStack {
+            viewModel.preview?
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
+
+            VStack {
+                Spacer()
+
+                Button(action: {
+                    isRecording ? viewModel.stopRecording() : viewModel.startRecording()
+                    isRecording.toggle()
+                }) {
+                    isRecording ? Text("Stop") : Text("Start")
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+        }
     }
 }
 
