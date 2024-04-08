@@ -9,11 +9,6 @@ import Foundation
 import SwiftUI
 import Vision
 
-struct Face: Identifiable {
-    var id: String = UUID().uuidString
-    var observation: VNFaceObservation
-}
-
 class ImagePreviewViewModel: NSObject, ObservableObject {
     @Published var imageArray: [UIImage] = []
     @Published var errorMessage: String?
