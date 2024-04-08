@@ -18,7 +18,7 @@ struct SelectorView: View {
                         Text("Seleccionar desde carrete")
                     }
                     NavigationLink {
-                        Text("Vídeo")
+                        CameraPreviewView()
                     } label: {
                         Text("Seleccionar cámara")
                     }
