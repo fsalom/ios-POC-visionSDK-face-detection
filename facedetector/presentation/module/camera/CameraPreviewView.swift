@@ -13,6 +13,14 @@ struct CameraPreviewView: View {
             viewModel.preview?
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .edgesIgnoringSafeArea(.all)
+                .overlay(
+                    GeometryReader { reader in
+                        ForEach(viewModel.faces) { face in
+                            Rectangle()
+                                .path(in: viewModel.calculateCGRect(with: face, and: reader))
+                                .stroke(Color.red, lineWidth: 2.0)
+                        }
+                    })
 
             VStack {
                 Spacer()
