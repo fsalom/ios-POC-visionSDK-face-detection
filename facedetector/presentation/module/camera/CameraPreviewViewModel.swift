@@ -7,10 +7,18 @@
 
 import Foundation
 import AVFoundation
+import Photos
+import Vision
+import UIKit
+import SwiftUI
 
 class CameraPreviewViewModel: NSObject, ObservableObject {
     let session: AVCaptureSession
+    private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: session)
+    private let videoDataOutput = AVCaptureVideoDataOutput()
+
     @Published var preview: Preview?
+    @Published var faces: [Face] = []
 
     override init() {
         self.session = AVCaptureSession()
@@ -25,6 +33,7 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
                     .addMovieFileOutput()
                     .startRunning()
 
+                getCameraFrames()
                 DispatchQueue.main.async {
                     self.preview = Preview(session: self.session, gravity: .resizeAspectFill)
                 }
@@ -64,8 +73,74 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
 
         output.stopRecording()
     }
+
+    private func getCameraFrames() {
+        videoDataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString): NSNumber(value: kCVPixelFormatType_32BGRA)] as [String: Any]
+
+        videoDataOutput.alwaysDiscardsLateVideoFrames = true
+        // You do not want to process the frames on the Main Thread so we off load to another thread
+        videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "camera_frame_processing_queue"))
+
+        session.addOutput(videoDataOutput)
+
+        guard let connection = videoDataOutput.connection(with: .video) else {
+            return
+        }
+
+      }
+
+    private func detectFace(image: CVPixelBuffer) {
+        let faceDetectionRequest = VNDetectFaceLandmarksRequest { vnRequest, error in
+            DispatchQueue.main.async {
+                if let results = vnRequest.results as? [VNFaceObservation], results.count > 0 {
+                    print("✅ Detected \(results.count) faces!")
+                    self.faces = results.map({ Face(observation: $0) })
+                } else {
+                    print("❌ No face was detected")
+                    self.faces.removeAll()
+                }
+            }
+        }
+
+        let imageResultHandler = VNImageRequestHandler(cvPixelBuffer: image,
+                                                       orientation: .rightMirrored,
+                                                       options: [:])
+        try? imageResultHandler.perform([faceDetectionRequest])
+    }
+
+    func calculateCGRect(with face: Face, and reader: GeometryProxy) -> CGRect {
+        print("---------------------")
+        print(reader.size.width)
+        print(reader.size.height)
+        print(face.observation.boundingBox.minX)
+        print(face.observation.boundingBox.minY)
+        print("-----------FACE-----------")
+
+        let boundingBox = face.observation.boundingBox
+        let size = CGSize(width: boundingBox.width * reader.size.width,
+                          height: boundingBox.height * reader.size.height)
+        let origin = CGPoint(x: boundingBox.minX * reader.size.width,
+                             y: boundingBox.minY * reader.size.height - size.height)
+        print(origin)
+        print(size)
+        print("-----------CGRECT-----------")
+        return CGRect(origin: origin,
+                      size: size)
+    }
 }
 
+extension CameraPreviewViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+
+        guard let frame = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            debugPrint("Unable to get image from the sample buffer")
+            return
+        }
+
+        detectFace(image: frame)
+    }
+
+}
 
 extension CameraPreviewViewModel: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
@@ -126,8 +201,6 @@ extension AVCaptureSession {
         return self
     }
 }
-
-import Photos
 
 extension CameraPreviewViewModel {
     func getAlbum(name: String, in photoLibrary: PHPhotoLibrary) throws -> PHAssetCollection {
