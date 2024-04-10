@@ -46,14 +46,12 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
 
     func startRecording() {
         guard let output = session.movieFileOutput else {
-            print("Cannot find movie file output")
             return
         }
 
         guard
             let directoryPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         else {
-            print("Cannot access local file domain")
             return
         }
 
@@ -67,7 +65,6 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
 
     func stopRecording() {
         guard let output = session.movieFileOutput else {
-            print("Cannot find movie file output")
             return
         }
 
@@ -76,9 +73,7 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
 
     private func getCameraFrames() {
         videoDataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString): NSNumber(value: kCVPixelFormatType_32BGRA)] as [String: Any]
-
         videoDataOutput.alwaysDiscardsLateVideoFrames = true
-        // You do not want to process the frames on the Main Thread so we off load to another thread
         videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "camera_frame_processing_queue"))
 
         session.addOutput(videoDataOutput)
@@ -120,7 +115,8 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
         let size = CGSize(width: boundingBox.width * reader.size.width,
                           height: boundingBox.height * reader.size.height)
         let origin = CGPoint(x: boundingBox.minX * reader.size.width,
-                             y: boundingBox.minY * reader.size.height - size.height)
+                             y: (1 - boundingBox.minY)
+                             * reader.size.height - size.height)
         print(origin)
         print(size)
         print("-----------CGRECT-----------")
@@ -136,7 +132,6 @@ extension CameraPreviewViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
             debugPrint("Unable to get image from the sample buffer")
             return
         }
-
         detectFace(image: frame)
     }
 
@@ -144,14 +139,11 @@ extension CameraPreviewViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 extension CameraPreviewViewModel: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        print("Video record is finished!")
 
-        // Newly added
         Task {
             guard
                 case .authorized = await PHPhotoLibrary.requestAuthorization(for: .addOnly)
             else {
-                print("Cannot gain authorization")
                 return
             }
 
@@ -170,7 +162,6 @@ extension AVCaptureSession {
     }
 
     func addMovieInput() throws -> Self {
-        // Add video input
         guard let videoDevice = AVCaptureDevice.default(for: AVMediaType.video) else {
             throw VideoError.device(reason: .unableToSetInput)
         }
@@ -187,7 +178,6 @@ extension AVCaptureSession {
 
     func addMovieFileOutput() throws -> Self {
         guard self.movieFileOutput == nil else {
-            // return itself if output is already set
             return self
         }
 
