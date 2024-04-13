@@ -14,17 +14,16 @@ import SwiftUI
 
 class CameraPreviewViewModel: NSObject, ObservableObject {
     let session: AVCaptureSession
-    private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: session)
     private let videoDataOutput = AVCaptureVideoDataOutput()
 
     @Published var preview: Preview?
     @Published var faces: [Face] = []
+    @State var drawings: [CAShapeLayer] = []
 
     override init() {
         self.session = AVCaptureSession()
 
         super.init()
-
         Task(priority: .background) {
             switch await AuthorizationChecker.checkCaptureAuthorizationStatus() {
             case .permitted:
@@ -35,13 +34,14 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
 
                 getCameraFrames()
                 DispatchQueue.main.async {
-                    self.preview = Preview(session: self.session, gravity: .resizeAspectFill)
+                    self.preview = Preview(session: self.session, gravity: .resizeAspectFill, drawings: self.$drawings)
                 }
 
             case .notPermitted:
                 break
             }
         }
+
     }
 
     func startRecording() {
@@ -82,14 +82,15 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
             return
         }
 
-      }
+    }
 
     private func detectFace(image: CVPixelBuffer) {
         let faceDetectionRequest = VNDetectFaceLandmarksRequest { vnRequest, error in
             DispatchQueue.main.async {
                 if let results = vnRequest.results as? [VNFaceObservation], results.count > 0 {
                     print("✅ Detected \(results.count) faces!")
-                    self.faces = results.map({ Face(observation: $0) })
+                    //self.faces = results.map({ Face(observation: $0) })
+                    self.handleFaceDetectionResults(observedFaces: results)
                 } else {
                     print("❌ No face was detected")
                     self.faces.removeAll()
@@ -101,6 +102,32 @@ class CameraPreviewViewModel: NSObject, ObservableObject {
                                                        orientation: .rightMirrored,
                                                        options: [:])
         try? imageResultHandler.perform([faceDetectionRequest])
+    }
+
+    private func handleFaceDetectionResults(observedFaces: [VNFaceObservation]) {
+        clearDrawings()
+
+        // Create the boxes
+        let facesBoundingBoxes: [CAShapeLayer] = observedFaces.map({ (observedFace: VNFaceObservation) -> CAShapeLayer in
+            let cgRect = preview?.previewLayer.layerRectConverted(fromMetadataOutputRect: observedFace.boundingBox)
+
+            let faceBoundingBoxOnScreen = cgRect
+            let faceBoundingBoxPath = CGPath(rect: faceBoundingBoxOnScreen!, transform: nil)
+            let faceBoundingBoxShape = CAShapeLayer()
+
+            // Set properties of the box shape
+            faceBoundingBoxShape.path = faceBoundingBoxPath
+            faceBoundingBoxShape.fillColor = UIColor.clear.cgColor
+            faceBoundingBoxShape.strokeColor = UIColor.green.cgColor
+
+            return faceBoundingBoxShape
+        })
+
+        drawings = facesBoundingBoxes
+    }
+
+    private func clearDrawings() {
+        //preview.drawings.forEach({ drawing in drawing.removeFromSuperlayer() })
     }
 
     func calculateCGRect(with face: Face, and reader: GeometryProxy) -> CGRect {
@@ -228,5 +255,56 @@ extension CameraPreviewViewModel {
             let enumeration = NSArray(object: placeholder)
             albumChangeRequest.addAssets(enumeration)
         }
+    }
+}
+
+fileprivate extension CGPoint {
+    func convertVisionToAVFoundation() -> CGPoint {
+        return CGPoint(x: self.x, y: 1 - self.y)
+    }
+}
+
+fileprivate extension CVPixelBuffer {
+
+    ///The input point must be in normalized AVFoundation coordinates. i.e. (0,0) is in the Top-Left, (1,1,) in the Bottom-Right.
+
+    func value(from point: CGPoint) -> Float? {
+
+        let width = CVPixelBufferGetWidth(self)
+
+        let height = CVPixelBufferGetHeight(self)
+
+        let colPosition = Int(point.x * CGFloat(width))
+
+        let rowPosition = Int(point.y * CGFloat(height))
+
+        return value(column: colPosition, row: rowPosition)
+
+    }
+
+    func value(column: Int, row: Int) -> Float? {
+
+        guard CVPixelBufferGetPixelFormatType(self) == kCVPixelFormatType_DepthFloat32 else { return nil }
+
+        CVPixelBufferLockBaseAddress(self, .readOnly)
+
+        if let baseAddress = CVPixelBufferGetBaseAddress(self) {
+
+            let width = CVPixelBufferGetWidth(self)
+
+            let index = column + (row * width)
+
+            let offset = index * MemoryLayout<Float>.stride
+
+            let value = baseAddress.load(fromByteOffset: offset, as: Float.self)
+
+            CVPixelBufferUnlockBaseAddress(self, .readOnly)
+
+            return value
+
+        }
+        CVPixelBufferUnlockBaseAddress(self, .readOnly)
+
+        return nil
     }
 }
